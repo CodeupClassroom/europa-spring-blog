@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fruit</title>
+</head>
+<body>
+<div th:include="partials/header.html :: my-partial">
+    This div will be *replaced* by the fragment
+</div>
+<h1>Fruit Basket</h1>
+<ul>
+    <li th:each="fruit : ${fruitBasket}">
+        <p th:text="${fruit}" />
+        <p th:if='${fruit.equals("pineapple")}' >This is my favorite</p>
+    </li>
+</ul>
+
+</body>
+</html>
