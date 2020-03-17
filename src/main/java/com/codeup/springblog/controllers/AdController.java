@@ -3,6 +3,7 @@ package com.codeup.springblog.controllers;
 import com.codeup.springblog.models.Ad;
 import com.codeup.springblog.repositories.AdRepo;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,6 +41,14 @@ public class AdController {
         ad.setTitle("Updated Title!");
         adDao.save(ad);
         return "Updating ad";
+    }
+
+
+    @GetMapping("/ads/search")
+    public String searchAd(Model model) {
+        Ad ad = adDao.findByTitle("scalable");
+        model.addAttribute("ad", ad);
+        return "ads/search";
     }
 
 
