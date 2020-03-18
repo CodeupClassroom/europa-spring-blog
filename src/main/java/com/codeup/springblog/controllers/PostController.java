@@ -1,6 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.repositories.PostRepo;
+import org.hibernate.service.spi.InjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,13 +14,15 @@ import java.util.ArrayList;
 @Controller
 public class PostController {
 
+    private PostRepo postDao;
+
+    public PostController(PostRepo postDao) {
+        this.postDao = postDao;
+    }
+
     @GetMapping("/posts")
     public String getPosts(Model model){
-        ArrayList<Post> postList = new ArrayList<>();
-        postList.add(new Post(2, "Second Post", "askdfhkashdfkjahsdf"));
-        postList.add(new Post(3, "Third Post", "some more text..."));
-
-        model.addAttribute("posts", postList);
+        model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
@@ -41,9 +46,11 @@ public class PostController {
         return "create a new post";
     }
 
-    @RequestMapping(path="/posts", method=RequestMethod.DELETE)
-    @ResponseBody
-    public String delete(){
-        return "DELETE!!";
+    @PostMapping("/posts/{id}/delete")
+    public String delete(@PathVariable long id){
+        // delete post
+        postDao.deleteById(id);
+        return "redirect:/posts";
     }
+
 }

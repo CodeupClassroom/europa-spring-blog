@@ -8,6 +8,10 @@
     <div th:each="post : ${posts}">
         <h1 th:text = "${post.title}"></h1>
         <p th:text = "${post.body}"></p>
+        <a href="#">Edit Post</a>
+        <form th:action="@{/posts/id/delete}" th:method="POST">
+            <button>Delete Post</button>
+        </form>
     </div>
 </body>
 </html>
