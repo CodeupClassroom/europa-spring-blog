@@ -38,15 +38,18 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String getCreatePostForm(){
-        return "view the form for creating a post";
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
-    public String createPost(){
-        return "create a new post";
+    public String createPost(@RequestParam String title, @RequestParam String body ){
+        Post newPost = new Post();
+        newPost.setTitle(title);
+        newPost.setBody(body);
+        newPost.setUser(userDao.getOne(1l));
+        postDao.save(newPost);
+        return "redirect:/posts";
     }
 
     @PostMapping("/posts/{id}/delete")
