@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repositories.PostRepo;
+import com.codeup.springblog.repositories.UserRepo;
 import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,11 @@ import java.util.ArrayList;
 public class PostController {
 
     private PostRepo postDao;
+    private UserRepo userDao;
 
-    public PostController(PostRepo postDao) {
+    public PostController(PostRepo postDao, UserRepo userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
