@@ -26,32 +26,32 @@ public class AdController {
     }
 
     // ad creation example with out form-model-binding
-    //    @GetMapping("/ads/create")
-    //    public String adCreateForm() {
-    //        return "ads/create";
-    //    }
-    //
-    //    @PostMapping("/ads")
-    //    public String insertAd(
-    //            @RequestParam String title,
-    //            @RequestParam String description,
-    //            @RequestParam String image1,
-    //            @RequestParam String image2,
-    //            @RequestParam String image3
-    //    ) {
-    //        Ad ad = new Ad();
-    //        ad.setTitle(title);
-    //        ad.setDescription(description);
-    //        ad.setImages(Arrays.asList(
-    //                new Image(image1, ad),
-    //                new Image(image2, ad),
-    //                new Image(image3, ad)
-    //        ));
-    //
-    //        adDao.save(ad);
-    //
-    //        return "redirect:/ads";
-    //    }
+//        @GetMapping("/ads/create")
+//        public String adCreateForm() {
+//            return "ads/create";
+//        }
+//
+//        @PostMapping("/ads")
+//        public String insertAd(
+//                @RequestParam String title,
+//                @RequestParam String description,
+//                @RequestParam String image1,
+//                @RequestParam String image2,
+//                @RequestParam String image3
+//        ) {
+//            Ad ad = new Ad();
+//            ad.setTitle(title);
+//            ad.setDescription(description);
+//            ad.setImages(Arrays.asList(
+//                    new Image(image1, ad),
+//                    new Image(image2, ad),
+//                    new Image(image3, ad)
+//            ));
+//
+//            adDao.save(ad);
+//
+//            return "redirect:/ads";
+//        }
 
 
     // ad creation with form-model-binding
@@ -64,6 +64,7 @@ public class AdController {
     @PostMapping("/ads")
     public String insertAd(@ModelAttribute Ad ad) {
         List<Image> images = ad.getImages();
+        // needed to associate the child entity with its parent
         for (Image image : images) {
             image.setAd(ad);
         }

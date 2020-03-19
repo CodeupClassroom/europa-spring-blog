@@ -32,14 +32,6 @@
                 <label for="images-">Image 3</label>
                 <input class="form-control" type="text" th:field="*{images}" placeholder="Enter image path">
             </div>
-
-<!--            <li th:each="item, stat : *{images}" class="itemRow">-->
-<!--                <div>-->
-<!--                    <label th:for="${'url-'+stat.index}">Field 1</label>-->
-<!--                    <input type="text" class="form-control quantity" name="url1"-->
-<!--                           th:field="*{images[__${stat.index}__].url}" th:id="${'url-'+stat.index}"/>-->
-<!--                </div>-->
-<!--            </li>-->
             <button class="btn btn-block btn-success">Create Ad</button>
         </form>
     </main>

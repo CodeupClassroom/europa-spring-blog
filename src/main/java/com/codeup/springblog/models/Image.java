@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Table(name = "images")
 public class Image {
 
+    // ad.images[0].ad.images[0].ad.images[0].ad
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

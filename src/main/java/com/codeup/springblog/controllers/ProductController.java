@@ -25,37 +25,37 @@ public class ProductController {
 
 
     // without form model binding
-    @GetMapping("/products/create")
-    public String create() {
-        return "products/create";
-    }
-
-    @PostMapping("/products")
-    public String insert(
-            @RequestParam String name,
-            @RequestParam int priceInCents
-    ) {
-        pdao.save(
-            new Product(
-                name,
-                priceInCents
-            )
-        );
-        return "redirect:/products";
-    }
+//    @GetMapping("/products/create")
+//    public String create() {
+//        return "products/create";
+//    }
+//
+//    @PostMapping("/products")
+//    public String insert(
+//            @RequestParam String name,
+//            @RequestParam int priceInCents
+//    ) {
+//        pdao.save(
+//            new Product(
+//                name,
+//                priceInCents
+//            )
+//        );
+//        return "redirect:/products";
+//    }
 
     // with form model binding
 
-    //    @GetMapping("/create")
-    //    public String create(Model model) {
-    //        model.addAttribute("product", new Product());
-    //        return "products/create-m";
-    //    }
-    //
-    //    @PostMapping("")
-    //    public String insert(@ModelAttribute Product product) {
-    //        pdao.save(product);
-    //        return "redirect:/products";
-    //    }
+//        @GetMapping("/products/create")
+//        public String create(Model model) {
+//            model.addAttribute("product", new Product());
+//            return "products/create-m";
+//        }
+//
+//        @PostMapping("/products")
+//        public String insert(@ModelAttribute Product product) {
+//            pdao.save(product);
+//            return "redirect:/products";
+//        }
 
 }
