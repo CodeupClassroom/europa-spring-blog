@@ -1,6 +1,10 @@
 package com.codeup.springblog.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ads")
@@ -16,7 +20,17 @@ public class Ad {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ad")
+    private List<Image> images;
+
     public Ad() {
+    }
+
+    public Ad(String title, String description, List<Image> images) {
+        this.title = title;
+        this.description = description;
+        this.images = images;
     }
 
     public long getId() {
@@ -41,5 +55,14 @@ public class Ad {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }
