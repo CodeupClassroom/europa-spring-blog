@@ -30,10 +30,11 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public String getPost(@PathVariable int id, Model model){
-        Post post1 = new Post(id, "Europa's First Post", "Remote Learning Today!");
-        model.addAttribute("title", post1.getTitle());
-        model.addAttribute("body", post1.getBody());
+    public String getPost(@PathVariable long id, Model model){
+//        Post post1 = new Post(id, "Europa's First Post", "Remote Learning Today!");
+//        model.addAttribute("title", post1.getTitle());
+//        model.addAttribute("body", post1.getBody());
+        model.addAttribute("post",postDao.getOne(id));
         return "posts/show";
     }
 
