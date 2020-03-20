@@ -5,7 +5,9 @@
     <title>Viewing Post</title>
 </head>
 <body>
-    <h1 th:text="${title}"></h1>
-    <p th:text="${body}"></p>
+    <h1 th:text="${post.title}"></h1>
+    <p th:text="${post.body}"></p>
+    <a th:href="'mailto:'+${post.user.email}"><span th:text="${post.user.email}"></span> </a>
+    <br>
 </body>
 </html>

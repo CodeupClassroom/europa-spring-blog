@@ -24,6 +24,9 @@ public class Ad {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ad")
     private List<Image> images;
 
+    @ManyToMany(mappedBy = "ads")
+    private List<AdCategory> categories;
+
     public Ad() {
     }
 
