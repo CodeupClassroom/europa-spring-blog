@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials/head :: head('Create Ad')"></head>
+<body>
+<div class="wrapper">
+    <nav th:replace="partials/navbar :: navbar"></nav>
+    <header class="container my-5">
+        <div class="jumbotron">
+            <h1 class="text-center display-1">Create Ad</h1>
+        </div>
+    </header>
+    <main class="container">
+        <h1>Create Ad Form</h1>
+        <form th:action="@{/ads}" th:method="POST">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-control" id="title" type="text" name="title" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" placeholder="Enter description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="title">Image 1</label>
+                <input class="form-control" id="image1" type="text" name="image1" placeholder="Enter image path">
+            </div>
+            <div class="form-group">
+                <label for="title">Image 2</label>
+                <input class="form-control" id="image2" type="text" name="image2" placeholder="Enter image path">
+            </div>
+            <div class="form-group">
+                <label for="title">Image 3</label>
+                <input class="form-control" id="image3" type="text" name="image3" placeholder="Enter image path">
+            </div>
+            <button class="btn btn-block btn-success">Create Ad</button>
+        </form>
+    </main>
+</div>
+<th:block th:replace="partials/scripts :: scripts" />
+</body>
+</html>
