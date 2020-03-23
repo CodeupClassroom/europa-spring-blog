@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Viewing Post</title>
@@ -9,5 +10,18 @@
     <p th:text="${post.body}"></p>
     <a th:href="'mailto:'+${post.user.email}"><span th:text="${post.user.email}"></span> </a>
     <br>
+    <div sec:authorize="isAuthenticated()">
+        <div th:if="user.id == post.user.id">
+            <a th:href="@{|/posts/${post.id}/edit|}"><button>Edit Post</button></a>
+        </div>
+    </div>
+<!--    <div sec:authorize="isAuthenticated()">-->
+<!--        This content is only shown to authenticated users.-->
+
+<!--        User ID: <span th:text="${#authentication.principal.id}"/>-->
+<!--        Username: <span th:text="${#authentication.principal.username}"/>-->
+<!--        Email: <span th:text="${#authentication.principal.email}"/>-->
+<!--    </div>-->
+
 </body>
 </html>

@@ -1,10 +1,12 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepo;
 import com.codeup.springblog.repositories.UserRepo;
 import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,7 @@ public class PostController {
 //        Post post1 = new Post(id, "Europa's First Post", "Remote Learning Today!");
 //        model.addAttribute("title", post1.getTitle());
 //        model.addAttribute("body", post1.getBody());
+        model.addAttribute("user", (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("post",postDao.getOne(id));
         return "posts/show";
     }
@@ -55,8 +58,12 @@ public class PostController {
 
     @PostMapping("/posts/{id}/delete")
     public String delete(@PathVariable long id){
+        System.out.println((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.getId() == postDao.getOne(id).getUser().getId())
         // delete post
-        postDao.deleteById(id);
+            postDao.deleteById(id);
+
         return "redirect:/posts";
     }
 
