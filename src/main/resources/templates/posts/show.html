@@ -11,7 +11,8 @@
     <a th:href="'mailto:'+${post.user.email}"><span th:text="${post.user.email}"></span> </a>
     <br>
     <div sec:authorize="isAuthenticated()">
-        <div th:if="user.id == post.user.id">
+
+        <div th:if="${userName == post.user.username}">
             <a th:href="@{|/posts/${post.id}/edit|}"><button>Edit Post</button></a>
         </div>
     </div>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.model.IModel;
 
+import java.security.Principal;
 import java.util.ArrayList;
 
 @Controller
@@ -32,18 +33,26 @@ public class PostController {
     }
 
     @GetMapping("/posts/{id}")
-    public String getPost(@PathVariable long id, Model model){
-//        Post post1 = new Post(id, "Europa's First Post", "Remote Learning Today!");
-//        model.addAttribute("title", post1.getTitle());
-//        model.addAttribute("body", post1.getBody());
-        model.addAttribute("user", (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public String getPost(@PathVariable long id, Model model, Principal principal){
+//        User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = "";
+        if (principal != null) {
+            userName = principal.getName();
+//            userDao.findByUsername(userName);
+        }
+        model.addAttribute("userName", userName);
         model.addAttribute("post",postDao.getOne(id));
         return "posts/show";
     }
 
     @GetMapping("/posts/create")
     public String getCreatePostForm(){
-        return "posts/create";
+        User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (loggedIn != null)
+            return "posts/create";
+        else
+            return "redirect:/login";
     }
 
     @PostMapping("/posts/create")
@@ -51,7 +60,8 @@ public class PostController {
         Post newPost = new Post();
         newPost.setTitle(title);
         newPost.setBody(body);
-        newPost.setUser(userDao.getOne(1l));
+        User loggedIn = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        newPost.setUser(loggedIn);
         postDao.save(newPost);
         return "redirect:/posts";
     }
