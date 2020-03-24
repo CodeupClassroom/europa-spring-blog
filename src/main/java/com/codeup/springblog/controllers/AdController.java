@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -32,8 +33,8 @@ public class AdController {
         return adDao.findAll();
     }
 
-    @GetMapping("/ads/create")
-    @ResponseBody
+    @PostMapping("/ads/create")
+//    @ResponseBody
     public String saveAd() {
         Ad newAd = new Ad();
         newAd.setTitle("New Ad");
@@ -43,7 +44,7 @@ public class AdController {
         String emailSubject = "This is the email subject";
         String emailBody = "Email Body Test";
         emailService.prepareAndSend(newAd, emailSubject, emailBody);
-        return "Saving ad";
+        return "redirect:/ads";
     }
 
     @GetMapping("/ads/update")
